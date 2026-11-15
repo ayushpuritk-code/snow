@@ -23,17 +23,18 @@ public final class WurstLogoOtf extends OtherFeature
 	private final ColorSetting bgColor = new ColorSetting("Background",
 		"Background color.\n"
 			+ "Only visible when \u00a76RainbowUI\u00a7r is disabled.",
-		new Color(0x05080C));
+		new Color(0x08040F));
 	
 	private final ColorSetting txtColor =
-		new ColorSetting("Text", "Text color.", new Color(0X00E5FF));
+		new ColorSetting("Text", "Text color.", new Color(0xA855F7));
 	
 	private final EnumSetting<Visibility> visibility =
 		new EnumSetting<>("Visibility", Visibility.values(), Visibility.ALWAYS);
 	
 	public WurstLogoOtf()
 	{
-		super("WurstLogo", "Shows the Wurst logo and version on the screen.");
+		super("SnowLogo",
+			"Shows the SnowClient logo and version on the screen.");
 		addSetting(bgColor);
 		addSetting(txtColor);
 		addSetting(visibility);

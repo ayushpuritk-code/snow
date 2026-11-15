@@ -33,7 +33,7 @@ public final class WurstOptionsOtf extends OtherFeature
 	
 	public WurstOptionsOtf()
 	{
-		super("WurstOptions", "description.wurst.other_feature.wurstoptions");
+		super("SnowOptions", "description.wurst.other_feature.wurstoptions");
 		addSetting(location);
 	}
 	
