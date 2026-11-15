@@ -23,10 +23,10 @@ public final class WurstLogoOtf extends OtherFeature
 	private final ColorSetting bgColor = new ColorSetting("Background",
 		"Background color.\n"
 			+ "Only visible when \u00a76RainbowUI\u00a7r is disabled.",
-		Color.WHITE);
+		new Color(0x05080C));
 	
 	private final ColorSetting txtColor =
-		new ColorSetting("Text", "Text color.", Color.BLACK);
+		new ColorSetting("Text", "Text color.", Color(0X00E5FF));
 	
 	private final EnumSetting<Visibility> visibility =
 		new EnumSetting<>("Visibility", Visibility.values(), Visibility.ALWAYS);

@@ -49,6 +49,8 @@ public final class WurstUpdater implements UpdateListener
 	
 	public void checkForUpdates()
 	{
+		if(true)
+		 return;
 		if(System.getProperty("fabric.client.gametest") != null)
 			return;
 		
