@@ -26,7 +26,7 @@ public final class WurstLogoOtf extends OtherFeature
 		new Color(0x05080C));
 	
 	private final ColorSetting txtColor =
-		new ColorSetting("Text", "Text color.", Color(0X00E5FF));
+		new ColorSetting("Text", "Text color.", new Color(0X00E5FF));
 	
 	private final EnumSetting<Visibility> visibility =
 		new EnumSetting<>("Visibility", Visibility.values(), Visibility.ALWAYS);

@@ -7,8 +7,7 @@
   "authors": [
     "SnowXzara"
   ],
-  "contact": {
-  },
+  "contact": {},
   "license": "GPL-3.0-or-later",
   "icon": "assets/wurst/icon.png",
   "environment": "client",

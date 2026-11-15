@@ -7,12 +7,9 @@
  */
 package net.wurstclient.options;
 
-import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
-
-import com.mojang.blaze3d.Blaze3D;
 
 import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.client.gui.Font;
