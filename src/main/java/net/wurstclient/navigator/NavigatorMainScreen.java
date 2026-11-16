@@ -7,10 +7,10 @@
  */
 package net.wurstclient.navigator;
 
+import com.mojang.blaze3d.platform.InputConstants;
+
 import java.awt.Rectangle;
 import java.util.ArrayList;
-
-import org.lwjgl.glfw.GLFW;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -68,7 +68,7 @@ public final class NavigatorMainScreen extends NavigatorScreen
 		searchBar.setFocused(true);
 		
 		searchBar.setX(middleX - 100);
-		setContentHeight(navigatorDisplayList.size() / 3 * 20);
+		setContentHeight(navigatorDisplayList.size() * 28);
 	}
 	
 	@Override
@@ -77,32 +77,32 @@ public final class NavigatorMainScreen extends NavigatorScreen
 		int keyCode = context.key();
 		boolean hasShiftDown = context.hasShiftDown();
 		
-		if(keyCode == GLFW.GLFW_KEY_ENTER)
+		if(keyCode == InputConstants.KEY_RETURN)
 			leftClick(selectedFeature);
 		
-		if(keyCode == GLFW.GLFW_KEY_SPACE)
+		if(keyCode == InputConstants.KEY_SPACE)
 			expand(selectedFeature);
 		
-		if(keyCode == GLFW.GLFW_KEY_RIGHT
-			|| keyCode == GLFW.GLFW_KEY_TAB && !hasShiftDown)
+		if(keyCode == InputConstants.KEY_RIGHT
+			|| keyCode == InputConstants.KEY_TAB && !hasShiftDown)
 		{
 			if(selectedFeature + 1 < navigatorDisplayList.size())
 				selectedFeature++;
 			
-		}else if(keyCode == GLFW.GLFW_KEY_LEFT
-			|| keyCode == GLFW.GLFW_KEY_TAB && hasShiftDown)
+		}else if(keyCode == InputConstants.KEY_LEFT
+			|| keyCode == InputConstants.KEY_TAB && hasShiftDown)
 		{
 			if(selectedFeature - 1 > -1)
 				selectedFeature--;
 			
-		}else if(keyCode == GLFW.GLFW_KEY_DOWN)
+		}else if(keyCode == InputConstants.KEY_DOWN)
 		{
-			if(selectedFeature + 3 < navigatorDisplayList.size())
-				selectedFeature += 3;
+			if(selectedFeature + 1 < navigatorDisplayList.size())
+				selectedFeature += 1;
 			
-		}else if(keyCode == GLFW.GLFW_KEY_UP)
-			if(selectedFeature - 3 > -1)
-				selectedFeature -= 3;
+		}else if(keyCode == InputConstants.KEY_UP)
+			if(selectedFeature - 1 > -1)
+				selectedFeature -= 1;
 	}
 	
 	@Override
@@ -115,7 +115,7 @@ public final class NavigatorMainScreen extends NavigatorScreen
 			return;
 		
 		// back button
-		if(button == GLFW.GLFW_MOUSE_BUTTON_4)
+		if(button == InputConstants.MOUSE_BUTTON_4)
 		{
 			WurstClient.MC.gui.setScreen((Screen)null);
 			return;
@@ -125,16 +125,16 @@ public final class NavigatorMainScreen extends NavigatorScreen
 			return;
 		
 		// arrow click, shift click, wheel click
-		if(button == GLFW.GLFW_MOUSE_BUTTON_LEFT
+		if(button == InputConstants.MOUSE_BUTTON_LEFT
 			&& (hasShiftDown || hoveringArrow)
-			|| button == GLFW.GLFW_MOUSE_BUTTON_MIDDLE)
+			|| button == InputConstants.MOUSE_BUTTON_MIDDLE)
 		{
 			expand(hoveredFeature);
 			return;
 		}
 		
 		// left click
-		if(button == GLFW.GLFW_MOUSE_BUTTON_LEFT)
+		if(button == InputConstants.MOUSE_BUTTON_LEFT)
 			leftClick(hoveredFeature);
 	}
 	
@@ -190,7 +190,7 @@ public final class NavigatorMainScreen extends NavigatorScreen
 				navigator.getSearchResults(navigatorDisplayList, newText);
 			}
 			
-			setContentHeight(navigatorDisplayList.size() / 3 * 20);
+			setContentHeight(navigatorDisplayList.size() * 28);
 			lastSearchText = newText;
 			selectedFeature = 0;
 		}
@@ -239,11 +239,11 @@ public final class NavigatorMainScreen extends NavigatorScreen
 		
 		extractor.enableScissor(0, 59, width, height - 42);
 		
-		for(int i = Math.max(-scroll * 3 / 20 - 3, 0); i < navigatorDisplayList
+		for(int i = Math.max(-scroll / 28 - 1, 0); i < navigatorDisplayList
 			.size(); i++)
 		{
-			int featureX = listX + 104 * (i % 3);
-			int featureY = 60 + i / 3 * 20 + scroll;
+			int featureX = listX + 4;
+			int featureY = 60 + i * 28 + scroll;
 			
 			if(featureY < 40)
 				continue;
@@ -304,7 +304,7 @@ public final class NavigatorMainScreen extends NavigatorScreen
 		boolean clickTimerRunning = clickTimer != -1;
 		
 		Feature feature = navigatorDisplayList.get(i);
-		Rectangle area = new Rectangle(x, y, 100, 16);
+		Rectangle area = new Rectangle(x, y, 300, 24);
 		
 		// click animation
 		if(clickTimerRunning)
@@ -354,8 +354,7 @@ public final class NavigatorMainScreen extends NavigatorScreen
 			tooltip = feature.getWrappedDescription(200);
 		
 		// box & shadow
-		int featColor = RenderUtils.toIntColor(
-			feature.isEnabled() ? new float[]{0, 1, 0} : gui.getBgColor(),
+		int featColor = RenderUtils.toIntColor(gui.getBgColor(),
 			gui.getOpacity() * (renderAsHovered ? 1.5F : 1));
 		drawBox(extractor, area.x, area.y, area.x + area.width,
 			area.y + area.height, featColor);
@@ -382,10 +381,16 @@ public final class NavigatorMainScreen extends NavigatorScreen
 		{
 			Font tr = minecraft.font;
 			String buttonText = feature.getName();
-			int bx = area.x + 4;
-			int by = area.y + 4;
-			int txtColor = gui.getTxtColor();
+			int bx = area.x + 6;
+			int by = area.y + 3;
+			int txtColor = feature.isEnabled() ? 0xFFA855F7 : gui.getTxtColor();
 			extractor.text(tr, buttonText, bx, by, txtColor, false);
+			
+			String desc = feature.getDescription().replace("\n", " ")
+				.replaceAll("\u00a7.", "");
+			if(desc.length() > 50)
+				desc = desc.substring(0, 50) + "...";
+			extractor.text(tr, desc, bx, by + 10, 0xFF8A8A9A, false);
 		}
 	}
 	
