@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "id": "wurst",
   "version": "${version}",
-  "name": "Wurst Client",
-  "description": "Wurst Wurst Wurst!",
+  "name": "Snow Client",
+  "description": "SNOW SNOW SNOW!",
   "authors": [
-    "Alexander01998"
+    "SNOWxzara"
   ],
   "contact": {
-    "homepage": "https://www.wurstclient.net/modmenu-homepage/",
-    "sources": "https://www.wurstclient.net/modmenu-sources/",
-    "issues": "https://www.wurstclient.net/modmenu-issues/"
+    "homepage": "https://www.snowclient.net/modmenu-homepage/",
+    "sources": "https://www.snowclient.net/modmenu-sources/",
+    "issues": "https://www.snowclient.net/modmenu-issues/"
   },
   "license": "GPL-3.0-or-later",
   "icon": "assets/wurst/icon.png",
@@ -48,10 +48,10 @@
     },
     "modmenu": {
       "links": {
-        "modmenu.donate": "https://www.wurstclient.net/modmenu-donate/",
-        "modmenu.twitter": "https://www.wurstclient.net/modmenu-twitter/",
-        "modmenu.wiki": "https://www.wurstclient.net/modmenu-wiki/",
-        "Forum": "https://www.wurstclient.net/modmenu-forum/"
+        "modmenu.donate": "https://www.snowclient.net/modmenu-donate/",
+        "modmenu.twitter": "https://www.snowclient.net/modmenu-twitter/",
+        "modmenu.wiki": "https://www.snowclient.net/modmenu-wiki/",
+        "Forum": "https://www.snowclient.net/modmenu-forum/"
       }
     }
   }

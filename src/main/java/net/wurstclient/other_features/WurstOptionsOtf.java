@@ -33,7 +33,7 @@ public final class WurstOptionsOtf extends OtherFeature
 	
 	public WurstOptionsOtf()
 	{
-		super("WurstOptions", "description.wurst.other_feature.wurstoptions");
+		super("SnowOptions", "description.wurst.other_feature.wurstoptions");
 		addSetting(location);
 	}
 	
@@ -54,7 +54,7 @@ public final class WurstOptionsOtf extends OtherFeature
 		MutableComponent message = Component.literal("            Options");
 		
 		MutableComponent narration =
-			Component.translatable("gui.narrate.button", "Wurst Options");
+			Component.translatable("gui.narrate.button", "SNOWCLIENT Options");
 		
 		Tooltip tooltip = Tooltip.create(Component.literal(getDescription()));
 		

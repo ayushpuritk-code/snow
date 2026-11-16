@@ -39,7 +39,7 @@ public final class HackListOtf extends OtherFeature
 	private final ColorSetting color = new ColorSetting("Color",
 		"Color of the HackList text.\n"
 			+ "Only visible when \u00a76RainbowUI\u00a7r is disabled.",
-		Color.WHITE);
+		new Color(0xA855F7));
 	
 	private final EnumSetting<SortBy> sortBy = new EnumSetting<>("Sort by",
 		"Determines how the HackList entries are sorted.\n"
